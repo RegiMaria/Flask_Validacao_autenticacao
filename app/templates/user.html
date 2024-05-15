@@ -1,0 +1,133 @@
+{% extends "index.html" %}
+
+{% block style %}
+<style>
+    /* Estilos para centralizar o container na tela */
+    .container {
+        width: 35%;
+        /* Define a largura do container */
+        margin: 0 auto;
+        /* Centraliza o container horizontalmente */
+        text-align: left;
+        /* Alinha o texto à esquerda dentro do container */
+        background-color: rgba(137, 51, 5, 0.798);
+        /* Define a cor de fundo do container */
+        padding: 5px;
+        /* Adiciona um espaçamento interno ao container */
+        border-radius: 10px;
+        border: 1.5px solid rgba(79, 30, 15, 0.703);
+        /* Adiciona bordas arredondadas ao container */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Adiciona uma sombra ao container */
+        color: rgb(243, 239, 239);
+    }
+
+    h2 {
+        color: rgb(240, 214, 209);
+    }
+
+    p {
+        color: aqua;
+        text-align: center;
+    }
+
+    .container-text {
+        border: 2px solid whitesmoke;
+        border-radius: 10px;
+        padding: 20px;
+        margin-left: 20px;
+    }
+
+    .centered-text {
+        text-align: center;
+    }
+
+    /* Estilos para o formulário dentro do container */
+    form {
+        width: 100%;
+        /* Define a largura do formulário */
+        padding: 0px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input {
+        width: calc(100% -20px);
+        /* Ajusta a largura dos inputs */
+        margin-bottom: 10px;
+        height: 28px;
+    }
+
+    .btn-submit {
+        width: calc(100% - 10px);
+        /* Define a largura do botão */
+        margin: 0;
+        /* Centraliza o botão horizontalmente */
+        display: inline-block;
+        /* Faz o botão ocupar uma linha inteira */
+        border-radius: 6px;
+        background-color: rgba(75, 22, 6, 0.703);
+        border: 1px solid rgba(79, 30, 15, 0.703);
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        transition: background-color 0.275s ease;
+        height: 30px;
+    }
+
+    .btn-submit:hover {
+        background-color: rgba(167, 50, 14, 0.703);
+        /* Cor do botão ao passar o mouse */
+    }
+
+    body {
+        background-color: orangered;
+        /* Define a cor de fundo do corpo da página */
+        display: flex;
+        /* Ativa o layout flexível para centralizar verticalmente o container */
+        justify-content: center;
+        /* Centraliza o container horizontalmente */
+        align-items: center;
+        /* Centraliza o container verticalmente */
+        height: 100vh;
+        /* Define a altura da página como 100% da altura da tela */
+    }
+</style>
+{% endblock %}
+
+{% block navbar%}
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+<div class="container-flash mt-3 fixed-top">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            {% for category, message in messages %}
+            {% if category == 'success' %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endwith %}
+{% endblock %}
+{% block conteudo %}
+<div class="container-text">
+    <h2 class="centered-text">Minha página de usuário</h2>
+    <p> Você está logado!</p>
+
+    <form method="POST" action="{{ url_for('logout') }}">
+        <button class="btn-submit" type=" submit">Fazer Logout</button>
+    </form>
+
+</div>
+
+
+
+{% endblock%}

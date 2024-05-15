@@ -1,0 +1,124 @@
+{% extends 'index.html'%}
+
+{% block title %}
+<title>
+    Login
+</title>
+
+{% endblock %}
+
+{% block style %}
+<style>
+    /* Estilos para centralizar o container na tela */
+    .container {
+        width: 35%;
+        /* Define a largura do container */
+        margin: 0 auto;
+        /* Centraliza o container horizontalmente */
+        text-align: left;
+        /* Alinha o texto à esquerda dentro do container */
+        background-color: rgba(137, 51, 5, 0.798);
+        /* Define a cor de fundo do container */
+        padding: 5px;
+        /* Adiciona um espaçamento interno ao container */
+        border-radius: 10px;
+        border: 1.5px solid rgba(79, 30, 15, 0.703);
+        /* Adiciona bordas arredondadas ao container */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Adiciona uma sombra ao container */
+        color: rgb(243, 239, 239);
+    }
+
+    h2 {
+        color: rgb(255, 73, 32);
+
+    }
+
+    /* Estilos para o formulário dentro do container */
+    form {
+        width: 100%;
+        /* Define a largura do formulário */
+        padding: 0px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input {
+        width: calc(100% -20px);
+        /* Ajusta a largura dos inputs */
+        margin-bottom: 10px;
+        height: 28px;
+    }
+
+    .btn {
+        width: calc(100% - 10px);
+        /* Define a largura do botão */
+        margin: 0;
+        /* Centraliza o botão horizontalmente */
+        display: inline-block;
+        /* Faz o botão ocupar uma linha inteira */
+        border-radius: 6px;
+        background-color: rgba(75, 22, 6, 0.703);
+        border: 1px solid rgba(79, 30, 15, 0.703);
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        transition: background-color 0.275s ease;
+        height: 30px;
+    }
+
+    .btn:hover {
+        background-color: rgba(167, 50, 14, 0.703);
+        /* Cor do botão ao passar o mouse */
+    }
+
+    body {
+        background-color: orangered;
+        /* Define a cor de fundo do corpo da página */
+        display: flex;
+        /* Ativa o layout flexível para centralizar verticalmente o container */
+        justify-content: center;
+        /* Centraliza o container horizontalmente */
+        align-items: center;
+        /* Centraliza o container verticalmente */
+        height: 100vh;
+        /* Define a altura da página como 100% da altura da tela */
+    }
+</style>
+{% endblock %}
+
+{% block conteudo %}
+<form method="POST" action="{{ url_for('login') }}" class="form-signin" style="color: rgb(1, 5, 6);">
+    {{ form.hidden_tag() }}
+
+    <div class="container">
+        <h2 style="text-align: left">Log In Form</h2>
+        <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(class="form-control", placeholder="Email Address") }}
+            {% for error in form.email.errors %}
+            <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ form.senha.label }}
+            <div class="input-group">
+                {{ form.senha(class="form-control", placeholder="Password") }}
+            </div>
+            {% for error in form.senha.errors %}
+            <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="text-center mb-3 ">
+            {{ form.submit(class="btn btn-outline-success mt-3") }}
+        </div>
+        <div class="checkbox mb-3 text-center">
+            <h7> Don't have an Acconunt yet?</h7>
+            <a class="btn btn-sm btn-light" href="{{url_for('register')}}"> Create Account </a>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    {% block title %}
+    <title>
+        base
+    </title>
+    {% endblock %}
+
+    {% block style %}
+    <style>
+        .principal-01a {
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid rgb(224, 224, 224);
+            box-sizing: border-box;
+            min-height: 100px;
+            min-width: 100%;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            .banner-text {
+                flex-direction: column;
+            }
+        }
+
+        .banner-text {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            justify-content: space-between;
+        }
+
+
+        * {
+            margin: 5px;
+            padding: 5px;
+            outline-color: rgb(225, 191, 214);
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media(max-width: 1024px) {
+            .bUMzGx {
+                width: 100%;
+                margin-bottom: 32px;
+            }
+        }
+
+        .container {
+            text-align: left;
+            /* posicionamento do conteúdo na tela */
+            background-color: aliceblue;
+            border: 15px;
+            margin: auto;
+            /* centralizar na tela */
+            max-width: 80%;
+            /* largura máxima do container */
+            padding: 20px;
+            /* espaço interno */
+            border-radius: 10px;
+            /* arredondamento dos cantos */
+        }
+
+        .btn-container {
+            margin-top: 10px;
+            /* Espaçamento entre o texto e o botão */
+        }
+
+
+        .btn {
+            font-size: 15px;
+            /* Ajusta o tamanho da fonte do botão */
+            padding: 10px 20px;
+            /* Ajusta o preenchimento do botão */
+            border-radius: 10px;
+            background-color: chocolate;
+            border: 2px solid rgb(128, 61, 13);
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            transition: background-color 0.275s ease;
+        }
+
+        .btn:hover {
+            background-color: rgb(96, 44, 7)
+                /* Cor do botão ao passar o mouse */
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block navbar%}
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    <div class="container-flash mt-3 fixed-top">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                {% for category, message in messages %}
+                {% if category == 'success' %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    {% endblock %}
+
+    {% block conteudo %}
+    <h2 style="text-align: center;"> Sobre o Flask-login </h2>
+    <hr>
+    <div class="principal-01a">
+        <div class="banner-text">
+            <div class="row mb-5">
+                <div class="container">
+                    <h4>Flask-login: um pacote cheio de recursos!</h4>
+                    <p>Um dos recursos mais comuns de uma aplicação web é permitir que o usuário faça login.
+                        Com o pacote flask_login (uma extensão do Flask) é possível realizar autenticação de usuário,
+                        gerenciamento de sessões, proteção de rotas entre outras funcionalidades.
+                        Conheça os componentes desse pacote:
+                    <ul>
+                        <li>
+                            <strong>LoginManager:</strong>
+                            <p>Essa classe configura e gerencia a autenticação de usuário.</p>
+                        </li>
+                        <li>
+                            <strong>current_user:</strong>
+                            <p>Essa função tem o papel de exibir informações específicas do usuário autenticado em uma
+                                página, verificando se um usuário está autenticado antes de permitir o acesso a
+                                determinadas rotas ou simplesmente acessar os dados do usuário durante o processamento
+                                de uma solicitação.</p>
+                        </li>
+                        <li>
+                            <strong>@login_required:</strong>
+                            <p>Decoradores de rota usados para proteger rotas específicas.</p>
+                        </li>
+                        <li>
+                            <strong>Métodos de usuário:</strong>
+                            <ul>
+                                <li>is_authenticated</li>
+                                <li>is_active</li>
+                                <li>get_id</li>
+                            </ul>
+                            <p>Esses métodos ajudam a determinar o estado e as permissões do usuário durante o processo
+                                de autenticação.</p>
+                        </li>
+                        <li>
+                            <strong>Gerenciamento de sessão:</strong>
+                            <p>Flask-Login gerencia automaticamente a sessão do usuário, armazenando e recuperando
+                                informações de usuário durante o ciclo de vida da sessão. Isso inclui o armazenamento
+                                seguro do ID do usuário na sessão do navegador do cliente.</p>
+                        </li>
+                        <li>
+                            <strong>Logout_user (Recursos de desautenticação):</strong>
+                            <p>O Flask-Login oferece métodos para desautenticar usuários, como logout_user, que podem
+                                ser usados para encerrar a sessão do usuário e remover suas informações de autenticação
+                                da sessão.</p>
+                        </li>
+                        <li>
+                            <strong>UserMixin:</strong>
+                            <p>Essa classe fornece implementações padrão para métodos comuns de usuários, como
+                                is_authenticated, is_active, is_anonymous, e get_id. Ela é frequentemente utilizada ao
+                                criar um modelo de usuário personalizado para integração com o Flask-Login.</p>
+                        </li>
+                        <li>
+                            <strong>Flash messages:</strong>
+                            <p>São mensagens curtas exibidas para o usuário em resposta a uma ação que ocorreu no
+                                sistema, como uma operação bem-sucedida, um erro ou uma confirmação. No contexto do
+                                Flask, as flash messages são mensagens temporárias que são armazenadas na sessão do
+                                usuário e exibidas em uma página posterior, geralmente na próxima renderização do
+                                template.</p>
+                        </li>
+                    </ul>
+                    </p>
+                    <div class="btn-container text-center">
+                        <a href="/register" class="btn btn-primary">Register</a>
+                    </div>
+                    <div class="btn-login text-center">
+                        <a href="/login" class="btn btn-primary">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+            </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/655857084e.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

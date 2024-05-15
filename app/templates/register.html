@@ -1,0 +1,173 @@
+{% extends 'index.html' %}
+
+{% block title %}
+<title>
+    Register
+
+</title>
+
+{% endblock%}
+
+{% block style %}
+<style>
+    /* Estilos para centralizar o container na tela */
+    .container {
+        width: 40%;
+        /* Define a largura do container */
+        margin: 0 auto;
+        /* Centraliza o container horizontalmente */
+        text-align: left;
+        /* Alinha o texto à esquerda dentro do container */
+        background-color: rgba(137, 51, 5, 0.798);
+        /* Define a cor de fundo do container */
+        padding: 20px;
+        /* Adiciona um espaçamento interno ao container */
+        border-radius: 10px;
+        border: 1.5px solid rgba(79, 30, 15, 0.703);
+        /* Adiciona bordas arredondadas ao container */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Adiciona uma sombra ao container */
+        color: rgb(243, 239, 239);
+    }
+
+    h2 {
+        color: rgb(255, 73, 32);
+        text-align: left;
+    }
+
+    /* Estilos para o formulário dentro do container */
+    form {
+        width: 100%;
+        /* Define a largura do formulário */
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input {
+        width: calc(100% - 20px);
+        /* Ajusta a largura dos inputs */
+        margin-bottom: 10px;
+        height: 28px;
+        border-radius: 5px;
+    }
+
+    /*Botão cadastrar*/
+    .btn-register {
+
+        width: calc(100% - 10px);
+        /* Define a largura do botão */
+        margin: 0;
+        /* Centraliza o botão horizontalmente */
+        display: inline-block;
+        /* Faz o botão ocupar uma linha inteira */
+        border-radius: 5px;
+        background-color: rgba(75, 22, 6, 0.703);
+        border: 1px solid rgba(79, 30, 15, 0.703);
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        transition: background-color 0.275s ease;
+        height: 30px;
+    }
+
+    .btn-register :hover {
+        background-color: rgba(214, 100, 14, 0.703);
+        /* Cor do botão ao passar o mouse */
+
+
+    }
+
+    body {
+        background-color: orangered;
+        /* Define a cor de fundo do corpo da página */
+        display: flex;
+        /* Ativa o layout flexível para centralizar verticalmente o container */
+        justify-content: center;
+        /* Centraliza o container horizontalmente */
+        align-items: center;
+        /* Centraliza o container verticalmente */
+        height: 100vh;
+        /* Define a altura da página como 100% da altura da tela */
+    }
+
+    /* Estilos para o botão de fechar do alerta */
+    .btn-close-custom {
+        font-size: 1rem;
+        line-height: 1;
+        color: #000;
+        opacity: 0.5;
+    }
+
+    .btn-close-custom:hover {
+        color: #000;
+        text-decoration: none;
+        opacity: 0.75;
+    }
+
+    .flash-message {
+        position: relative;
+        top: -60px;
+        /* Posiciona a mensagem 60px acima do formulário */
+        margin-bottom: -60px;
+        /* Evita espaço extra entre a mensagem e o formulário */
+    }
+
+    .alert {
+        text-align: center;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+</style>
+
+{% endblock %}
+
+<body>
+    {% block navbar %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    <div class="container-flash mt-3 fixed-top">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                {% for category, message in messages %}
+                {% if category == 'success' %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% endblock %}
+
+
+    {% block conteudo %}
+    <div class="container">
+        <h2 style="text-align: left">Registration Form</h2>
+        <form method="POST" action="/register">
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
+            <div>
+                {{ form.username.label }} {{ form.username(size=20) }}
+            </div>
+            <div>
+                {{ form.email.label }} {{ form.email(size=20) }}
+            </div>
+            <div>
+                {{ form.password.label }} {{ form.password(size=20) }}
+            </div>
+            <div>
+                {{ form.submit(class="btn btn-register") }}
+            </div>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+
+
+</html>
