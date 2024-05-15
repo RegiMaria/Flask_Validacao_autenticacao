@@ -21,7 +21,7 @@ O Flask-Login é uma extensão do flask que oferece gerenciamento de sessão de 
 - UserMixin class;
 - Flash messages;
 
+![](app-img/pageuserss.png)
+      
 
 
-
-https://medium.com/geekculture/how-to-write-a-decorator-for-python-flask-to-check-logged-in-status-3689872f6635
